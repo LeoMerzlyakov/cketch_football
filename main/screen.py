@@ -18,19 +18,28 @@ class Screen:
     def get_screen(self):
         return self.screen
     
-    def _drow_menu(self):
-        pygame.draw.rect(self.screen, MENU_COLOR, [350, 0, 700, 700], 0)
-
     def _drow_field(self):
-        pygame.draw.rect(self.screen, GRASS_COLOR, [0, 0, 350, 700], 0)
+        pygame.draw.rect(self.screen, GRASS_COLOR, [0, 0, 400, 700], 0)
         greed = self._make_grid_points()
         for point in greed:
-            pygame.draw.circle(self.screen, center=point, radius=1, color=WHITE_COLOR)
+            print(point)
+            pygame.draw.circle(self.screen, center=point, radius=2, color=MENU_COLOR)
+
+        field_corners = [
+            (50, 50),
+            (320, 50),
+            (320, 320),
+            (50, 320),
+        ]
+        pygame.draw.lines(self.screen, color=MENU_COLOR, points=field_corners, closed=True, width=2)
+
 
     def _make_grid_points(self) -> list:
         greed = Greed()
         return greed.get_points()
 
+    def _drow_menu(self):
+        pygame.draw.rect(self.screen, MENU_COLOR, [350, 0, 700, 700], 0)
 
 class Greed:
     def __init__(self) -> None:
@@ -42,7 +51,7 @@ class Greed:
         return self.points
     
     def _make_points(self) -> None:
-        for point_y in range(50, 650, 30):
-            for point_x in range(50, 300, 30):
+        for point_y in range(50, 330, 30):
+            for point_x in range(50, 330, 30):
                 point = (point_x, point_y)
                 self.points.append(point)
